@@ -2,7 +2,7 @@
 (more of a bestbuy stock alert but it's better than nothing)\
 Helps you with best buy drops. Multithreaded stock checks. NO AUTOCHECKOUT
 
-#### Table of contents
+# Table of contents
 
 1. [WHAT IT DOES](#what-it-does)
 2. [WHAT IT DOESN'T](#what-it-doesnt)
