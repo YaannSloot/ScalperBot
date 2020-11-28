@@ -77,6 +77,8 @@ Close the window when you're finished
 This program is pretty light on resources so you can run multiple instances if you want\
 Be careful about your eardrums tho
 
+It also might be a good idea to restart your pc when you're done. Webdriver doesn't exactly have the most graceful of shutdowns, and instances may still be running after you close the program.
+
 Don't mind the source btw if you want to modify that. \
 I kinda hacked the rest of this together once I didn't care to finish everything.
 
