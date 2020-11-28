@@ -40,6 +40,9 @@ Heres a few links for where you can get one:
 * Don't go any lower than v11. The jar was compiled for 11+
 * Also ps. Some links may need an oracle account. Go for newest version first to avoid this
 
+Also this needs firefox installed on your system.\
+You should probably go get that if you want this to work
+
 ## CONFIGURATION
 If you want an audible alarm - Place a .wav file titled "alarm.wav"\
 If you don't want an audible alarm - Delete "alarm.wav"\
