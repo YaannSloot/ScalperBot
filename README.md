@@ -13,7 +13,7 @@ Helps you with best buy drops. Multithreaded stock checks. NO AUTOCHECKOUT
 7. [EDITING](#editing)
 
 ## WHAT IT DOES
-Helps you get going on best buy drops when they happen
+Helps get you going on best buy drops as soon as they happen
 
 BB has been staggering add to cart links recently so getting into a browser as soon as stock is available is your best chance
 
