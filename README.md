@@ -10,6 +10,7 @@ Helps you with best buy drops. Multithreaded stock checks. NO AUTOCHECKOUT
 4. [BEFORE YOU START](#before-you-start)
 5. [CONFIGURATION](#configuration)
 6. [RUNNING](#running)
+7. [EDITING](#editing)
 
 ## WHAT IT DOES
 Helps you get going on best buy drops when they happen
@@ -75,3 +76,10 @@ Be careful about your eardrums tho
 
 Don't mind the source btw if you want to modify that. \
 I kinda hacked the rest of this together once I didn't care to finish everything.
+
+## EDITING
+This was made in eclipse\
+Yes I know pom is probably wrong\
+You need to add jars in ./selenium-java-3.141.59 and ./selenium-java-3.141.59/libs to your build path\
+You also need to add miglayout15-swing.jar to your build path\
+You should be good to go after that
