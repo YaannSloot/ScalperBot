@@ -5,7 +5,7 @@ Helps you with best buy drops. Multithreaded stock checks. NO AUTOCHECKOUT
 #### Table of contents
 
 1. [WHAT IT DOES](#what-it-does)
-2. [WHAT IT DOESN'T](#what-it-doesn't)
+2. [WHAT IT DOESN'T](#what-it-doesnt)
 3. [UPDATES???](#will-this-get-updates)
 4. [BEFORE YOU START](#before-you-start)
 5. [CONFIGURATION](#configuration)
