@@ -11,7 +11,7 @@ Helps you with best buy drops. Multithreaded stock checks. NO AUTOCHECKOUT
 5. [CONFIGURATION](#configuration)
 6. [RUNNING](#running)
 
-# WHAT IT DOES
+## WHAT IT DOES
 Helps you get going on best buy drops when they happen
 
 BB has been staggering add to cart links recently so getting into a browser as soon as stock is available is your best chance
@@ -21,17 +21,17 @@ stuff is in stock (via web scraping). Once in stock, opens firefox with links to
 
 Also notifies you via discord webhooks and plays a wav file to act as an alarm
 
-# WHAT IT DOESN'T
+## WHAT IT DOESN'T
 Auto checkout - I was going to do this but I already got a card so I don't care anymore
 
 Continuous notifications - The bot will stop as soon as it finds what you are looking for
 
-# WILL THIS GET UPDATES???
+## WILL THIS GET UPDATES???
 Probably not
 
 Don't expect me to review pulls on github very often either
 
-# BEFORE YOU START
+## BEFORE YOU START
 This program needs a proper jdk\
 Heres a few links for where you can get one:
 * JDK 15 - https://www.oracle.com/java/technologies/javase-jdk15-downloads.html
@@ -39,7 +39,7 @@ Heres a few links for where you can get one:
 * Don't go any lower than v11. The jar was compiled for 11+
 * Also ps. Some links may need an oracle account. Go for newest version first to avoid this
 
-# CONFIGURATION
+## CONFIGURATION
 If you want an audible alarm - Place a .wav file titled "alarm.wav"\
 If you don't want an audible alarm - Delete "alarm.wav"\
 If you want discord webhooks:
@@ -55,7 +55,7 @@ If you want discord webhooks:
 
 Thats it really
 
-# RUNNING
+## RUNNING
 Double click givemecardplz.jar\
 A window opens\
 It will ask you what you want to search for\
