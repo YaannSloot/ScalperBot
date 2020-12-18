@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.iansloat.scalperbot.entities.products.Cart;
 import com.iansloat.scalperbot.entities.products.Product;
 
 public class TargetWrapper implements Store {
@@ -28,6 +29,24 @@ public class TargetWrapper implements Store {
 
 	@Override
 	public boolean isLoggedIn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean initBrowserInstance() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Cart getCart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean addProductToCart(Product product) {
 		// TODO Auto-generated method stub
 		return false;
 	}

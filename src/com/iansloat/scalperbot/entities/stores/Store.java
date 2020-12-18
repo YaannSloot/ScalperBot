@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.iansloat.scalperbot.entities.products.Cart;
 import com.iansloat.scalperbot.entities.products.Product;
 
 public interface Store {
@@ -12,5 +13,8 @@ public interface Store {
 	boolean isLoggedIn();
 	String getStoreID();
 	FirefoxDriver getBrowserInstance();
+	Cart getCart();
+	boolean initBrowserInstance();
+	boolean addProductToCart(Product product);
 	
 }

@@ -85,46 +85,59 @@ public class ScalperBot {
 
 	public static FirefoxDriver getNewBrowserInstance() {
 		FirefoxProfile profile = new ProfilesIni().getProfile("selenium");
-		if (profile != null) {
-			FirefoxBinary firefoxBinary = new FirefoxBinary();
-			firefoxBinary.addCommandLineOptions("--headless");
-			System.setProperty("webdriver.gecko.driver", ".\\geckodriver.exe");
-			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
-			FirefoxOptions firefoxOptions = new FirefoxOptions();
-			firefoxOptions.setBinary(firefoxBinary);
-			if (profile != null)
-				firefoxOptions.setProfile(profile);
-			LoggingPreferences pref = new LoggingPreferences();
-			pref.enable(LogType.BROWSER, Level.OFF);
-			pref.enable(LogType.CLIENT, Level.OFF);
-			pref.enable(LogType.DRIVER, Level.OFF);
-			pref.enable(LogType.PERFORMANCE, Level.OFF);
-			pref.enable(LogType.PROFILER, Level.OFF);
-			pref.enable(LogType.SERVER, Level.OFF);
-			firefoxOptions.setCapability(CapabilityType.LOGGING_PREFS, pref);
-			FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
-			driverCache.add(driver);
-			return driver;
-		} else
-			return null;
+		if (profile == null) {
+			try {
+				logger.info("Creating firefox selenium profile...");
+				Runtime.getRuntime().exec(new FirefoxBinary().toJson() + " -CreateProfile selenium");
+				Thread.sleep(2000);
+				profile = new ProfilesIni().getProfile("selenium");
+				if (profile == null) {
+					logger.error("Failed to create selenium profile");
+					Thread.sleep(3000);
+					System.exit(-1);
+				}
+			} catch (IOException | InterruptedException e) {
+				return null;
+			}
+		}
+		FirefoxBinary firefoxBinary = new FirefoxBinary();
+		firefoxBinary.addCommandLineOptions("--headless");
+		System.setProperty("webdriver.gecko.driver", ".\\geckodriver.exe");
+		System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
+		firefoxOptions.setBinary(firefoxBinary);
+		if (profile != null)
+			firefoxOptions.setProfile(profile);
+		LoggingPreferences pref = new LoggingPreferences();
+		pref.enable(LogType.BROWSER, Level.OFF);
+		pref.enable(LogType.CLIENT, Level.OFF);
+		pref.enable(LogType.DRIVER, Level.OFF);
+		pref.enable(LogType.PERFORMANCE, Level.OFF);
+		pref.enable(LogType.PROFILER, Level.OFF);
+		pref.enable(LogType.SERVER, Level.OFF);
+		firefoxOptions.setCapability(CapabilityType.LOGGING_PREFS, pref);
+		FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
+		driverCache.add(driver);
+		return driver;
 	}
-	
+
 	private static void displayTray() throws AWTException {
-        //Obtain only one instance of the SystemTray object
-        SystemTray tray = SystemTray.getSystemTray();
+		// Obtain only one instance of the SystemTray object
+		SystemTray tray = SystemTray.getSystemTray();
 
-        //If the icon is a file
-        Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
-        //Alternative (if the icon is on the classpath):
-        //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
+		// If the icon is a file
+		Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
+		// Alternative (if the icon is on the classpath):
+		// Image image =
+		// Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
 
-        TrayIcon trayIcon = new TrayIcon(image, "Stock checker");
-        //Let the system resize the image if needed
-        trayIcon.setImageAutoSize(true);
-        //Set tooltip text for the tray icon
-        trayIcon.setToolTip("Stock alert");
-        tray.add(trayIcon);
-        trayIcon.addActionListener(new ActionListener() {
+		TrayIcon trayIcon = new TrayIcon(image, "Stock checker");
+		// Let the system resize the image if needed
+		trayIcon.setImageAutoSize(true);
+		// Set tooltip text for the tray icon
+		trayIcon.setToolTip("Stock alert");
+		tray.add(trayIcon);
+		trayIcon.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -134,15 +147,21 @@ public class ScalperBot {
 					public void run() {
 						frmScalperBot.toFront();
 					}
-					
+
 				});
 			}
-        	
-        });
-        trayIcon.displayMessage("STOCK FOUND!!!!!", "WEE WOO WEE WOO", MessageType.INFO);
-    }
+
+		});
+		trayIcon.displayMessage("STOCK FOUND!!!!!", "WEE WOO WEE WOO", MessageType.INFO);
+	}
 
 	public static void main(String[] args) {
+
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				driverCache.forEach(d -> d.quit());
+			}
+		});
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -197,7 +216,7 @@ public class ScalperBot {
 
 		Enter.setEnabled(false);
 		textField.setEditable(false);
-		
+
 		MessageConsole mc = new MessageConsole(textArea);
 
 		mc.redirectOut();
@@ -228,21 +247,6 @@ public class ScalperBot {
 			logger.info("Webhook message set to " + webHookMsg);
 		}
 		bestbuy = new BestbuyJob();
-		if (bestbuy.getStore().getBrowserInstance() == null) {
-			try {
-				logger.info("Creating firefox selenium profile...");
-				Runtime.getRuntime().exec(new FirefoxBinary().toJson() + " -CreateProfile selenium");
-				Thread.sleep(2000);
-				bestbuy = new BestbuyJob();
-				if (bestbuy == null) {
-					logger.error("Failed to create selenium profile");
-					Thread.sleep(3000);
-					System.exit(-1);
-				}
-			} catch (IOException | InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 		boolean doLoop = true;
 		List<Product> products;
 		while (doLoop) {
@@ -385,13 +389,13 @@ public class ScalperBot {
 		frmScalperBot.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if(audioInputStream != null)
+				if (audioInputStream != null)
 					try {
 						audioInputStream.close();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				if(clip != null)
+				if (clip != null)
 					clip.stop();
 			}
 		});
